@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0e0c" />
+    <meta
+      name="description"
+      content="Gerico Alagon is a computer engineer, fraud analyst, and software engineer who builds practical tools, automations, and safer business workflows."
+    />
+    <title>Gerico Alagon — Computer Engineer, Fraud Analyst &amp; Software Engineer</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2359b45a' d='M4 4h24v8H4z'/%3E%3Cpath fill='%236b4934' d='M4 12h24v16H4z'/%3E%3Cpath fill='%233b2a20' d='M9 16h5v5H9zm9 0h5v5h-5z'/%3E%3Cpath fill='%230b0e0c' d='M14 21h4v3h-4z'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&amp;display=swap" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      (function (C, A, L) {
+        const queue = function (api, args) { api.q.push(args); };
+        const documentRef = C.document;
+        C.Cal = C.Cal || function () {
+          const cal = C.Cal;
+          const args = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            documentRef.head.appendChild(documentRef.createElement('script')).src = A;
+            cal.loaded = true;
+          }
+          if (args[0] === L) {
+            const api = function () { queue(api, arguments); };
+            const namespace = args[1];
+            api.q = api.q || [];
+            if (typeof namespace === 'string') {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              queue(cal.ns[namespace], args);
+              queue(cal, ['initNamespace', namespace]);
+            } else {
+              queue(cal, args);
+            }
+            return;
+          }
+          queue(cal, args);
+        };
+      })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+      Cal('init', '15min', { origin: 'https://app.cal.com' });
+      Cal.config = Cal.config || {};
+      Cal.config.forwardQueryParams = true;
+      Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
+    </script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header shell" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Gerico Alagon, home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>GERICO<span class="accent">.DEV</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Portfolio sections">
+        <a href="#projects">Builds</a>
+        <a href="#toolkit">Inventory</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to daylight theme">
+        <span aria-hidden="true">☀</span>
+        <span class="theme-label">Daylight</span>
+      </button>
+    </header>
+
+    <main id="main" class="shell" tabindex="-1">
+      <div class="portfolio-grid" id="top">
+        <section class="card hero-card reveal" aria-labelledby="intro-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="status-pip"></span> PLAYER ONE / AVAILABLE</p>
+            <h1 id="intro-title">I build digital worlds that feel <span class="accent">good to explore.</span></h1>
+            <p class="lede">
+              Hi, I’m <strong>Gerico</strong> — an independent contractor, fraud analyst, and software engineer. I help
+              businesses streamline workflows, strengthen operations, and protect revenue through practical analysis,
+              web tools, and automation.
+            </p>
+            <p class="supporting-copy">
+              With a background in computer engineering and years of fraud work, I’m comfortable adapting across roles
+              and turning complex tasks into simpler, safer systems.
+            </p>
+
+            <div class="hero-actions">
+              <button
+                class="button button-primary meet-button"
+                type="button"
+                data-cal-link="gerico-tl5oic/15min"
+                data-cal-namespace="15min"
+                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":true}'
+              >
+                <svg class="meet-logo" aria-hidden="true" viewBox="0 0 24 24">
+                  <path fill="#00832d" d="M2 6h11v12H2z" />
+                  <path fill="#00ac47" d="M7 6h6v12H7z" />
+                  <path fill="#2684fc" d="m2 6 3-3h8v3z" />
+                  <path fill="#ea4335" d="m13 9 7-4v14l-7-4z" />
+                  <path fill="#ffba00" d="M13 9h3v6h-3z" />
+                </svg>
+                <span>Book a Meet</span>
+              </button>
+              <a class="button button-ghost social-button icon-only" href="https://github.com/gericxonstreakz" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 .7A11.3 11.3 0 0 0 8.4 22.8c.6.1.8-.3.8-.6v-2.2c-3.4.7-4.1-1.4-4.1-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.8 11.8 0 0 1 6.2 0c2.4-1.6 3.4-1.2 3.4-1.2.7 1.6.3 2.9.1 3.2.8.9 1.2 2 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A11.3 11.3 0 0 0 12 .7Z"/></svg>
+              </a>
+              <a class="button button-ghost social-button icon-only" href="https://www.linkedin.com/in/gerico-alagon-52a810274/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5.3 7.8H1.7V22h3.6V7.8ZM3.5 2A2.1 2.1 0 1 0 3.5 6.2 2.1 2.1 0 0 0 3.5 2ZM22 13.8c0-4.3-2.3-6.3-5.3-6.3a4.6 4.6 0 0 0-4.2 2.3h-.1v-2h-3.5V22h3.6v-7c0-1.8.3-3.6 2.6-3.6 2.3 0 2.3 2.1 2.3 3.7V22H22v-8.2Z"/></svg>
+              </a>
+              <a class="button button-ghost social-button icon-only" href="https://www.instagram.com/gericxonstreak/" target="_blank" rel="noreferrer" aria-label="Instagram" title="Instagram">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm-.2 2A3 3 0 0 0 4 7v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm10.4 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="world-window avatar-window" aria-label="Animated Minecraft-style character activity" data-avatar-stage>
+            <div class="avatar-glow" aria-hidden="true"></div>
+            <img class="avatar-frame is-active" src="./assets/avatar-wave.png" alt="" data-avatar-label="WAVING HI" />
+            <img class="avatar-frame" src="./assets/avatar-work.png" alt="" data-avatar-label="WORKING" />
+            <img class="avatar-frame" src="./assets/avatar-coffee.png" alt="" data-avatar-label="COFFEE BREAK" />
+            <img class="avatar-frame" src="./assets/avatar-sleep.png" alt="" data-avatar-label="SLEEPING" />
+            <div class="avatar-status" aria-live="polite">
+              <span><i aria-hidden="true"></i> NOW</span>
+              <strong data-avatar-status>WAVING HI</strong>
+              <span data-avatar-count>01 / 04</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="card toolkit-card reveal" id="toolkit" aria-labelledby="toolkit-title">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">INVENTORY</p>
+              <h2 id="toolkit-title">Stack &amp; tools</h2>
+            </div>
+            <span class="slot-count">SKILLS</span>
+          </div>
+
+          <div class="skill-group">
+            <h3>Fraud &amp; risk</h3>
+            <div class="tags">
+              <span>Fraud Detection</span><span>Fraud Claims</span><span>Fraud Analysis</span><span>Fraud Investigations</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3>Engineering &amp; IT</h3>
+            <div class="tags">
+              <span>Software Development</span><span>Hardware Assembly</span><span>Technical Support</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3>Data &amp; commerce</h3>
+            <div class="tags">
+              <span>Data Analysis</span><span>Dropshipping</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3>Databases</h3>
+            <div class="tags"><span>SQL</span><span>PostgreSQL</span></div>
+          </div>
+          <div class="skill-group">
+            <h3>Web languages</h3>
+            <div class="tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+          </div>
+          <div class="skill-group">
+            <h3>Tools &amp; deployment</h3>
+            <div class="tags"><span>Git</span><span>GitHub</span><span>GitHub Pages</span><span>Cal.com</span></div>
+          </div>
+
+          <div class="inventory-progress">
+            <div class="progress-track" aria-label="Toolkit coverage: 68 percent"><span style="width: 68%"></span></div>
+            <div class="progress-label"><span>Toolkit coverage</span><strong>68%</strong></div>
+          </div>
+        </aside>
+
+        <section class="card profile-card reveal" aria-labelledby="profile-title">
+          <p class="eyebrow">PLAYER PROFILE</p>
+          <div class="profile-intro">
+            <img class="profile-photo" src="./assets/profile-photo.jpg" alt="Portrait of Gerico Alagon" />
+            <h2 id="profile-title">Let’s build something worth remembering.</h2>
+          </div>
+          <dl class="profile-list">
+            <div><dt>Class</dt><dd>Computer Engineer</dd></div>
+            <div><dt>Specialty</dt><dd>Fraud Analyst · Software Engineer</dd></div>
+            <div><dt>Status</dt><dd><span class="status-pip"></span> Open to work</dd></div>
+          </dl>
+          <div class="profile-pixels" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </section>
+
+        <section class="card projects-card reveal" id="projects" aria-labelledby="projects-title">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">SELECTED BUILDS</p>
+              <h2 id="projects-title">Recent work</h2>
+            </div>
+            <a class="text-link" href="https://github.com/gericxonstreakz" target="_blank" rel="noreferrer">All builds ↗</a>
+          </div>
+
+          <div class="project-list">
+            <article class="project-row">
+              <div class="project-number" aria-hidden="true">01</div>
+              <div class="project-copy">
+                <div class="project-meta"><span>WEB APP</span><span>2026</span></div>
+                <h3>Craftboard</h3>
+                <p>A calm project workspace that turns messy ideas into focused, trackable quests.</p>
+                <div class="tags"><span>React</span><span>Node.js</span><span>PostgreSQL</span></div>
+              </div>
+              <a class="project-link" href="#contact" aria-label="Ask about the Craftboard project">↗</a>
+            </article>
+
+            <article class="project-row">
+              <div class="project-number project-number-gold" aria-hidden="true">02</div>
+              <div class="project-copy">
+                <div class="project-meta"><span>DESIGN SYSTEM</span><span>2025</span></div>
+                <h3>Biome UI</h3>
+                <p>A reusable component library built for speed, consistency, and accessible interaction.</p>
+                <div class="tags"><span>TypeScript</span><span>Storybook</span><span>Figma</span></div>
+              </div>
+              <a class="project-link" href="#contact" aria-label="Ask about the Biome UI project">↗</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="card currently-card reveal" aria-labelledby="currently-title">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">CURRENT QUEST</p>
+              <h2 id="currently-title">Risk Analyst / Tech Support</h2>
+            </div>
+            <span class="signal" aria-label="Currently employed"></span>
+          </div>
+          <p class="current-company">Currently working at <strong>Whim</strong></p>
+          <div class="employment-meta"><span>STARTED</span><strong>APR 2026 — PRESENT</strong></div>
+        </section>
+
+        <section class="card principles-card reveal" aria-labelledby="principles-title">
+          <p class="eyebrow">HOW I WORK</p>
+          <h2 id="principles-title">Simple rules. Solid builds.</h2>
+          <ol class="principle-list">
+            <li><span>01</span><p><strong>Make it useful.</strong> Solve the real problem before adding polish.</p></li>
+            <li><span>02</span><p><strong>Make it clear.</strong> Good interfaces explain themselves.</p></li>
+            <li><span>03</span><p><strong>Make it last.</strong> Build systems that are easy to maintain.</p></li>
+          </ol>
+        </section>
+
+        <section class="card time-card reveal" aria-labelledby="time-title">
+          <p class="eyebrow">WORLD CLOCK</p>
+          <h2 id="time-title" class="visually-hidden">Philippine and visitor local times</h2>
+          <div class="clock-display">
+            <div class="clock-zone clock-zone-primary">
+              <div class="clock-label">
+                <span class="clock-signal" aria-hidden="true"></span>
+                <span>IN PHILIPPINES</span>
+                <span class="clock-format">12H</span>
+              </div>
+              <time data-time-pht>--:-- --</time>
+              <p>GMT+8 · PHT</p>
+            </div>
+            <div class="clock-relation" data-time-relation>CALCULATING TIME DIFFERENCE</div>
+            <div class="clock-zone">
+              <div class="clock-label">
+                <span>WHERE YOU ARE</span>
+                <span class="clock-location" data-local-zone>LOCAL</span>
+              </div>
+              <time data-time-local>--:-- --</time>
+              <p data-local-offset>LOCAL TIME</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="card stats-card reveal" aria-labelledby="stats-title">
+          <p class="eyebrow">WORLD STATS</p>
+          <h2 id="stats-title" class="visually-hidden">Portfolio statistics</h2>
+          <dl class="stats-grid">
+            <div><dt>Workspaces</dt><dd>4<span>+</span></dd></div>
+            <div><dt>Years experience</dt><dd>3 <span>years</span></dd></div>
+            <div><dt>Coffee crafted</dt><dd>∞</dd></div>
+          </dl>
+        </section>
+
+        <section class="card palette-card reveal" aria-labelledby="palette-title">
+          <p class="eyebrow">COLOR PALETTE</p>
+          <h2 id="palette-title" class="visually-hidden">Accent color</h2>
+          <div class="palette-options" role="group" aria-label="Choose site accent color">
+            <button type="button" data-accent="red" aria-label="Red accent" style="--swatch:#ef4444"></button>
+            <button type="button" data-accent="amber" aria-label="Amber accent" style="--swatch:#f4b52e"></button>
+            <button type="button" data-accent="blue" aria-label="Blue accent" style="--swatch:#4f8df7"></button>
+            <button type="button" data-accent="violet" aria-label="Violet accent" style="--swatch:#9b5cf6"></button>
+            <button class="is-active" type="button" data-accent="green" aria-label="Green accent" aria-pressed="true" style="--swatch:#65bd63"></button>
+          </div>
+        </section>
+
+        <section class="card contact-card reveal" id="contact" aria-labelledby="contact-title">
+          <div>
+            <p class="eyebrow">OPEN CHANNEL</p>
+            <h2 id="contact-title">Let’s connect.</h2>
+            <p>Tell me what you’re building, where it’s stuck, and what success looks like.</p>
+          </div>
+          <div class="contact-actions">
+            <a
+              class="button button-light"
+              href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=g.alagon1623%40gmail.com"
+              target="_blank"
+              rel="noreferrer"
+            >g.alagon1623@gmail.com <span aria-hidden="true">↗</span></a>
+            <button class="copy-button" type="button" data-email="g.alagon1623@gmail.com">Copy email</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer shell">
+      <p>© <span id="year">2026</span> Gerico Alagon</p>
+      <p>Built block by block. No creepers were harmed.</p>
+      <a class="back-to-spawn" href="#top">Back to spawn ↑</a>
+    </footer>
+  </body>
+</html>
