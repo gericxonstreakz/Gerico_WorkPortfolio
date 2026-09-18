@@ -16,7 +16,7 @@
     />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&amp;display=swap" />
-    <link rel="stylesheet" href="./styles.css?v=20260918-7" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-8" />
     <script>
       (function (C, A, L) {
         const queue = function (api, args) { api.q.push(args); };
@@ -52,7 +52,7 @@
       Cal.config.forwardQueryParams = true;
       Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
     </script>
-    <script src="./script.js?v=20260918-5" defer></script>
+    <script src="./script.js?v=20260918-6" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -66,7 +66,7 @@
       <nav class="nav-links" aria-label="Portfolio sections">
         <a href="./allbuilds/">Builds</a>
         <a href="./inventory/">Inventory</a>
-        <a href="#contact">Contact</a>
+        <button class="nav-contact-trigger" type="button" data-contact-dialog-open>Contact</button>
       </nav>
 
       <div class="header-controls">
@@ -141,7 +141,7 @@
         </section>
 
         <div class="right-rail">
-        <aside class="card toolkit-card reveal" id="toolkit" aria-labelledby="toolkit-title">
+        <a class="card toolkit-card toolkit-card-link reveal" id="toolkit" href="./inventory/" aria-labelledby="toolkit-title">
           <div class="card-heading">
             <div>
               <p class="eyebrow">INVENTORY</p>
@@ -186,10 +186,10 @@
           </div>
 
           <div class="inventory-progress">
-            <div class="progress-track" aria-label="Toolkit coverage: 68 percent"><span style="width: 68%"></span></div>
-            <div class="progress-label"><span>Toolkit coverage</span><strong>68%</strong></div>
+            <div class="progress-track" aria-label="Toolkit coverage: 75 percent"><span style="width: 75%"></span></div>
+            <div class="progress-label"><span>Toolkit coverage</span><strong>75%</strong></div>
           </div>
-        </aside>
+        </a>
 
         <section class="card currently-card reveal" aria-labelledby="currently-title">
           <div class="card-heading">
@@ -197,9 +197,12 @@
               <p class="eyebrow" data-quest-label>CURRENT QUEST</p>
               <h2 id="currently-title" data-quest-role>Risk Analyst / Tech Support</h2>
             </div>
-            <button class="quest-toggle" type="button" data-quest-toggle aria-label="Show next work experience" title="Show next work experience">
-              <span data-quest-count>01 / 04</span><span aria-hidden="true">↻</span>
-            </button>
+            <div class="quest-actions">
+              <span class="quest-current-light" data-quest-light aria-label="Current role active" title="Current role active"></span>
+              <button class="quest-toggle" type="button" data-quest-toggle aria-label="Show next work experience" title="Show next work experience">
+                <span data-quest-count>01 / 04</span><span aria-hidden="true">↻</span>
+              </button>
+            </div>
           </div>
           <div data-quest-content aria-live="polite">
             <p class="current-company"><span data-quest-tense>Currently working at</span> <strong data-quest-company>Whim</strong></p>
@@ -365,6 +368,23 @@
         </section>
       </div>
     </main>
+
+    <dialog class="contact-dialog" data-contact-dialog aria-labelledby="contact-dialog-title">
+      <button class="contact-dialog-close" type="button" data-contact-dialog-close aria-label="Close contact options">×</button>
+      <p class="eyebrow">OPEN CHANNEL</p>
+      <h2 id="contact-dialog-title">How would you like to connect?</h2>
+      <p>Choose a quick meeting or open a new Gmail message.</p>
+      <div class="contact-dialog-actions">
+        <button
+          class="button button-primary contact-choice"
+          type="button"
+          data-cal-link="gerico-tl5oic/15min"
+          data-cal-namespace="15min"
+          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":true}'
+        ><span aria-hidden="true">▣</span><span>Book a Meet</span></button>
+        <a class="button button-ghost contact-choice" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=g.alagon1623%40gmail.com" target="_blank" rel="noreferrer"><span aria-hidden="true">✉</span><span>Email Gerico</span></a>
+      </div>
+    </dialog>
 
     <footer class="site-footer shell">
       <p>© <span id="year">2026</span> Gerico Alagon</p>

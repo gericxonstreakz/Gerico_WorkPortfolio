@@ -22,6 +22,12 @@ const questCompany = document.querySelector('[data-quest-company]');
 const questPeriod = document.querySelector('[data-quest-period]');
 const questCount = document.querySelector('[data-quest-count]');
 const questContent = document.querySelector('[data-quest-content]');
+const questLight = document.querySelector('[data-quest-light]');
+const contactDialog = document.querySelector('[data-contact-dialog]');
+const contactDialogOpen = document.querySelector('[data-contact-dialog-open]');
+const contactDialogClose = document.querySelector('[data-contact-dialog-close]');
+const dialogMeetButton = contactDialog?.querySelector('[data-cal-link]');
+const dialogEmailLink = contactDialog?.querySelector('a[href*="mail.google.com"]');
 
 const workExperience = [
   {
@@ -67,6 +73,7 @@ const showExperience = (index, returning = false) => {
     questCompany.textContent = experience.company;
     questPeriod.textContent = experience.period;
     questCount.textContent = `${String(index + 1).padStart(2, '0')} / ${String(workExperience.length).padStart(2, '0')}`;
+    if (questLight) questLight.hidden = index !== 0;
     questPanel?.classList.remove('is-changing', 'is-returning');
   }, 110);
 };
@@ -82,6 +89,22 @@ questToggle?.addEventListener('click', () => {
     }, 6500);
   }
 });
+
+contactDialogOpen?.addEventListener('click', () => {
+  if (typeof contactDialog?.showModal === 'function') contactDialog.showModal();
+});
+
+contactDialogClose?.addEventListener('click', () => contactDialog?.close());
+
+contactDialog?.addEventListener('click', (event) => {
+  if (event.target === contactDialog) contactDialog.close();
+});
+
+dialogMeetButton?.addEventListener('click', () => {
+  window.setTimeout(() => contactDialog?.close(), 0);
+});
+
+dialogEmailLink?.addEventListener('click', () => contactDialog?.close());
 
 const setTheme = (theme) => {
   const isDaylight = theme === 'daylight';
