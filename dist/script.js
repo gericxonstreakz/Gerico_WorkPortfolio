@@ -13,7 +13,9 @@ const localZone = document.querySelector('[data-local-zone]');
 const localOffset = document.querySelector('[data-local-offset]');
 const timeRelation = document.querySelector('[data-time-relation]');
 const panels = [...document.querySelectorAll('.card')];
+const questPanel = document.querySelector('.currently-card');
 const questToggle = document.querySelector('[data-quest-toggle]');
+const questLabel = document.querySelector('[data-quest-label]');
 const questRole = document.querySelector('[data-quest-role]');
 const questTense = document.querySelector('[data-quest-tense]');
 const questCompany = document.querySelector('[data-quest-company]');
@@ -49,24 +51,36 @@ const workExperience = [
 ];
 
 let activeExperience = 0;
+let questTransitionTimer;
+let questResetTimer;
 
-const showExperience = (index) => {
+const showExperience = (index, returning = false) => {
   const experience = workExperience[index];
   if (!experience || !questRole || !questTense || !questCompany || !questPeriod || !questCount) return;
-  questContent?.classList.add('is-changing');
-  window.setTimeout(() => {
+  window.clearTimeout(questTransitionTimer);
+  questPanel?.classList.remove('is-changing', 'is-returning');
+  questPanel?.classList.add(returning ? 'is-returning' : 'is-changing');
+  questTransitionTimer = window.setTimeout(() => {
+    if (questLabel) questLabel.textContent = index === 0 ? 'CURRENT QUEST' : 'PREVIOUS QUEST';
     questRole.textContent = experience.role;
     questTense.textContent = experience.tense;
     questCompany.textContent = experience.company;
     questPeriod.textContent = experience.period;
     questCount.textContent = `${String(index + 1).padStart(2, '0')} / ${String(workExperience.length).padStart(2, '0')}`;
-    questContent?.classList.remove('is-changing');
+    questPanel?.classList.remove('is-changing', 'is-returning');
   }, 110);
 };
 
 questToggle?.addEventListener('click', () => {
+  window.clearTimeout(questResetTimer);
   activeExperience = (activeExperience + 1) % workExperience.length;
   showExperience(activeExperience);
+  if (activeExperience > 0) {
+    questResetTimer = window.setTimeout(() => {
+      activeExperience = 0;
+      showExperience(activeExperience, true);
+    }, 6500);
+  }
 });
 
 const setTheme = (theme) => {

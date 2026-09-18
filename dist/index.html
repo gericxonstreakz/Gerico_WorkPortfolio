@@ -16,7 +16,7 @@
     />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&amp;display=swap" />
-    <link rel="stylesheet" href="./styles.css?v=20260918-6" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-7" />
     <script>
       (function (C, A, L) {
         const queue = function (api, args) { api.q.push(args); };
@@ -52,7 +52,7 @@
       Cal.config.forwardQueryParams = true;
       Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
     </script>
-    <script src="./script.js?v=20260918-4" defer></script>
+    <script src="./script.js?v=20260918-5" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -64,7 +64,7 @@
       </a>
 
       <nav class="nav-links" aria-label="Portfolio sections">
-        <a href="#projects">Builds</a>
+        <a href="./allbuilds/">Builds</a>
         <a href="./inventory/">Inventory</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -194,7 +194,7 @@
         <section class="card currently-card reveal" aria-labelledby="currently-title">
           <div class="card-heading">
             <div>
-              <p class="eyebrow">CURRENT QUEST</p>
+              <p class="eyebrow" data-quest-label>CURRENT QUEST</p>
               <h2 id="currently-title" data-quest-role>Risk Analyst / Tech Support</h2>
             </div>
             <button class="quest-toggle" type="button" data-quest-toggle aria-label="Show next work experience" title="Show next work experience">
