@@ -156,7 +156,14 @@ button {
   text-decoration: underline;
 }
 
-.theme-toggle {
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle,
+.sound-toggle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -170,8 +177,14 @@ button {
   box-shadow: 3px 3px 0 var(--shadow);
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.sound-toggle:hover,
+.sound-toggle.is-active {
   border-color: var(--green);
+}
+
+.sound-toggle.is-active .sound-icon {
+  color: var(--green);
 }
 
 .portfolio-grid {
@@ -1248,7 +1261,8 @@ body.has-page-scroll .back-to-spawn {
     border-top: 1px solid var(--line);
   }
 
-  .theme-label {
+  .theme-label,
+  .sound-label {
     display: none;
   }
 

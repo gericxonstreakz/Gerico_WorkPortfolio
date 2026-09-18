@@ -1,6 +1,9 @@
 const body = document.body;
 const themeToggle = document.querySelector('.theme-toggle');
 const themeLabel = document.querySelector('.theme-label');
+const soundToggle = document.querySelector('.sound-toggle');
+const soundLabel = document.querySelector('.sound-label');
+const soundIcon = document.querySelector('.sound-icon');
 const copyButton = document.querySelector('.copy-button');
 const avatarStage = document.querySelector('[data-avatar-stage]');
 const paletteButtons = [...document.querySelectorAll('[data-accent]')];
@@ -79,6 +82,8 @@ paletteButtons.forEach((button) => {
 
 let panelAudioContext;
 let panelHoverAudio;
+let panelSoundsEnabled = false;
+let soundPreference = localStorage.getItem('portfolio-sound') !== 'off';
 
 const getPanelAudioContext = () => {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -133,6 +138,7 @@ const getPanelHoverAudio = () => {
 };
 
 const playPanelHoverSound = () => {
+  if (!panelSoundsEnabled) return;
   const audioContext = getPanelAudioContext();
   if (!audioContext || audioContext.state !== 'running') {
     const fallbackSound = getPanelHoverAudio().cloneNode();
@@ -156,11 +162,51 @@ const playPanelHoverSound = () => {
   oscillator.stop(now + 0.075);
 };
 
-window.addEventListener('pointerdown', () => {
-  getPanelAudioContext();
+const updateSoundControl = () => {
+  if (!soundToggle) return;
+  soundToggle.classList.toggle('is-active', panelSoundsEnabled);
+  soundToggle.setAttribute('aria-pressed', String(panelSoundsEnabled));
+  soundToggle.setAttribute('aria-label', panelSoundsEnabled ? 'Disable interface sounds' : 'Enable interface sounds');
+  soundToggle.title = panelSoundsEnabled ? 'Disable interface sounds' : 'Enable interface sounds';
+  soundIcon.textContent = panelSoundsEnabled ? '♫' : '♪';
+  soundLabel.textContent = panelSoundsEnabled ? 'Sound on' : 'Enable sound';
+};
+
+const enablePanelSounds = async (playConfirmation = false) => {
+  panelSoundsEnabled = true;
+  updateSoundControl();
+  const audioContext = getPanelAudioContext();
   getPanelHoverAudio();
-}, { once: true, passive: true });
-window.addEventListener('keydown', getPanelAudioContext, { once: true });
+  if (audioContext?.state === 'suspended') {
+    await audioContext.resume().catch(() => {});
+  }
+  if (playConfirmation && panelSoundsEnabled) playPanelHoverSound();
+};
+
+updateSoundControl();
+
+soundToggle?.addEventListener('click', async () => {
+  if (panelSoundsEnabled) {
+    panelSoundsEnabled = false;
+    soundPreference = false;
+    localStorage.setItem('portfolio-sound', 'off');
+    updateSoundControl();
+    return;
+  }
+  soundPreference = true;
+  localStorage.setItem('portfolio-sound', 'on');
+  await enablePanelSounds(true);
+});
+
+window.addEventListener('pointerdown', (event) => {
+  if (!soundPreference || panelSoundsEnabled || event.target.closest('.sound-toggle')) return;
+  enablePanelSounds();
+}, { passive: true });
+
+window.addEventListener('keydown', (event) => {
+  if (!soundPreference || panelSoundsEnabled || event.target.closest('.sound-toggle')) return;
+  enablePanelSounds();
+});
 
 if (window.matchMedia('(hover: hover)').matches) {
   panels.forEach((panel) => panel.addEventListener('pointerenter', playPanelHoverSound));

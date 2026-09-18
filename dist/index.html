@@ -16,7 +16,7 @@
     />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&amp;display=swap" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-2" />
     <script>
       (function (C, A, L) {
         const queue = function (api, args) { api.q.push(args); };
@@ -52,7 +52,7 @@
       Cal.config.forwardQueryParams = true;
       Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
     </script>
-    <script src="./script.js" defer></script>
+    <script src="./script.js?v=20260918-2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -69,10 +69,16 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to daylight theme">
-        <span aria-hidden="true">☀</span>
-        <span class="theme-label">Daylight</span>
-      </button>
+      <div class="header-controls">
+        <button class="sound-toggle" type="button" aria-pressed="false" aria-label="Enable interface sounds" title="Enable interface sounds">
+          <span class="sound-icon" aria-hidden="true">♪</span>
+          <span class="sound-label">Enable sound</span>
+        </button>
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to daylight theme">
+          <span aria-hidden="true">☀</span>
+          <span class="theme-label">Daylight</span>
+        </button>
+      </div>
     </header>
 
     <main id="main" class="shell" tabindex="-1">

@@ -11,7 +11,7 @@ The main identity and contact details are already personalized for Gerico Alagon
 - the two sample projects and project statistics
 - the current quest and availability status
 
-The colors, spacing, compact single-screen layout, Satoshi typography, and accent-aware panel hover states are in `dist/styles.css`. The theme switch, daylight-compatible accent palette, dual clocks, animated activity, subtle block-style hover sound, copy-email action, current year, and responsive footer behavior are in `dist/script.js`. The “Book a Meet” button uses the Cal.com embed configured in `dist/index.html` for `gerico-tl5oic/15min`.
+The colors, spacing, compact single-screen layout, Satoshi typography, and accent-aware panel hover states are in `dist/styles.css`. The theme switch, daylight-compatible accent palette, dual clocks, animated activity, header sound control, subtle block-style hover sound, copy-email action, current year, and responsive footer behavior are in `dist/script.js`. The “Book a Meet” button uses the Cal.com embed configured in `dist/index.html` for `gerico-tl5oic/15min`.
 
 ### Portrait and animated character
 
