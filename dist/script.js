@@ -28,6 +28,8 @@ const contactDialogOpen = document.querySelector('[data-contact-dialog-open]');
 const contactDialogClose = document.querySelector('[data-contact-dialog-close]');
 const dialogMeetButton = contactDialog?.querySelector('[data-cal-link]');
 const dialogEmailLink = contactDialog?.querySelector('a[href*="mail.google.com"]');
+const francoisButton = document.querySelector('[data-francois]');
+const francoisMessage = document.querySelector('[data-francois-message]');
 
 const workExperience = [
   {
@@ -49,7 +51,7 @@ const workExperience = [
     period: 'JAN 2024 — OCT 2024',
   },
   {
-    role: 'Fraud Analyst / Legal VA',
+    role: 'Fraud Analyst / Virtual Assistant',
     tense: 'Previously working at',
     company: 'The VA Hub US',
     period: 'JUN 2023 — JAN 2024',
@@ -367,6 +369,30 @@ if (avatarStage) {
       showAvatarFrame(activeFrame);
     }, 2800);
   }
+}
+
+if (francoisButton && francoisMessage) {
+  const messages = [
+    "I'm Francois!",
+    'I am his loyal friend.',
+    'Nice to meet you!',
+    'Walk with me!',
+    'Keep exploring!',
+  ];
+  let messageIndex = -1;
+  let messageTimer;
+
+  const showFrancoisMessage = () => {
+    window.clearTimeout(messageTimer);
+    messageIndex = (messageIndex + 1) % messages.length;
+    francoisMessage.textContent = messages[messageIndex];
+    francoisButton.classList.add('is-speaking');
+    messageTimer = window.setTimeout(() => francoisButton.classList.remove('is-speaking'), 2600);
+  };
+
+  francoisButton.addEventListener('pointerenter', showFrancoisMessage);
+  francoisButton.addEventListener('focus', showFrancoisMessage);
+  francoisButton.addEventListener('click', showFrancoisMessage);
 }
 
 const revealItems = document.querySelectorAll('.reveal');

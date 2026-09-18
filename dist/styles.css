@@ -695,6 +695,23 @@ h3 {
   z-index: 2;
 }
 
+.profile-link-overlay {
+  position: absolute !important;
+  inset: 0;
+  z-index: 2 !important;
+  border: 0;
+  text-decoration: none;
+}
+
+.profile-link-overlay:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: -6px;
+}
+
+.profile-resume-button {
+  z-index: 3 !important;
+}
+
 .profile-pixels {
   position: absolute;
   z-index: 1;
@@ -1121,8 +1138,10 @@ h3 {
 }
 
 .palette-options button {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  aspect-ratio: 1;
   padding: 0;
   border: 3px solid transparent;
   border-radius: 50%;
@@ -1271,6 +1290,111 @@ h3 {
 
 .site-footer a {
   justify-self: end;
+}
+
+.francois-zone {
+  padding-bottom: 16px;
+}
+
+.francois-track {
+  position: relative;
+  height: 116px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(to bottom, transparent 0 72%, color-mix(in srgb, var(--green) 22%, transparent) 72% 76%, var(--surface-2) 76% 100%),
+    repeating-linear-gradient(90deg, transparent 0 31px, color-mix(in srgb, var(--line) 45%, transparent) 31px 32px);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+
+.francois-character {
+  --dog-width: 118px;
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: var(--dog-width);
+  height: 78px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  animation: francois-roam 18s linear infinite alternate;
+}
+
+.francois-sprite {
+  display: block;
+  width: 100%;
+  animation: francois-turn 36s steps(1, end) infinite;
+}
+
+.francois-sprite img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(4px 5px 0 var(--shadow));
+  animation: francois-step 520ms steps(2, end) infinite;
+}
+
+.francois-message {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 70px;
+  min-width: max-content;
+  max-width: 190px;
+  padding: 6px 9px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition: opacity 120ms steps(2, end), transform 120ms steps(2, end);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+
+.francois-message::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 8px;
+  height: 8px;
+  background: var(--surface);
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.francois-character:hover .francois-message,
+.francois-character:focus-visible .francois-message,
+.francois-character.is-speaking .francois-message {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.francois-character:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@keyframes francois-roam {
+  from { left: 0; }
+  to { left: calc(100% - var(--dog-width)); }
+}
+
+@keyframes francois-turn {
+  0%, 49.99% { transform: scaleX(1); }
+  50%, 100% { transform: scaleX(-1); }
+}
+
+@keyframes francois-step {
+  50% { transform: translateY(-3px) rotate(-1deg); }
 }
 
 .back-to-spawn {
@@ -1460,8 +1584,9 @@ body.has-page-scroll .back-to-spawn {
 @media (min-width: 1180px) and (min-height: 800px) {
   html,
   body {
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .site-header {
@@ -1996,13 +2121,14 @@ body.has-page-scroll .back-to-spawn {
   .palette-options {
     width: 100%;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     margin-top: 4px;
   }
 
   .palette-options button {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
+    flex-basis: 24px;
     border-width: 2px;
   }
 
@@ -2911,6 +3037,26 @@ body.has-page-scroll .back-to-spawn {
   .gallery-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .francois-track {
+    height: 108px;
+  }
+
+  .francois-character {
+    --dog-width: 96px;
+    height: 66px;
+    animation-duration: 14s;
+  }
+
+  .francois-sprite {
+    animation-duration: 28s;
+  }
+
+  .francois-message {
+    bottom: 60px;
+    max-width: 150px;
+    font-size: 0.62rem;
   }
 
 }
