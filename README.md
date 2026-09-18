@@ -1,6 +1,6 @@
 # Minecraft-inspired portfolio
 
-A responsive one-page portfolio with an inventory-style toolkit, animated Minecraft character, live dual-timezone clock with an automatic PHT-to-visitor time difference, selectable accent palette, accessible navigation, and a GitHub Pages deployment workflow.
+A responsive Minecraft-inspired portfolio with an inventory-style toolkit, animated character, live dual-timezone clock, selectable accent palette, experience switcher, résumé viewer, detailed project case studies, accessible navigation, and a GitHub Pages deployment workflow.
 
 ## Make it yours
 
@@ -8,10 +8,22 @@ The main identity, Legal VA specialty, technical skills, and contact details are
 
 - the introduction or professional roles
 - the Gmail, GitHub, LinkedIn, and Instagram links
-- the two sample projects and project statistics
-- the current quest and availability status
+- the four featured projects and project statistics
+- the current quest, previous work experience, and availability status
 
-The colors, spacing, compact single-screen layout, Satoshi typography, and accent-aware panel hover states are in `dist/styles.css`. The theme switch, daylight-compatible accent palette, dual clocks, animated activity, remembered sound preference, subtle block-style hover sound, copy-email action, current year, and responsive footer behavior are in `dist/script.js`. Sound defaults to on; switching it off is remembered across refreshes. The “Book a Meet” button uses the Cal.com embed configured in `dist/index.html` for `gerico-tl5oic/15min`.
+The colors, spacing, compact single-screen layout, Satoshi typography, case-study layouts, and accent-aware panel hover states are in `dist/styles.css`. The theme switch, daylight-compatible accent palette, dual clocks, animated activity, experience switcher, remembered sound preference, subtle block-style hover sound, copy-email action, current year, and responsive footer behavior are in `dist/script.js`. Sound defaults to on; switching it off is remembered across refreshes. The “Book a Meet” button uses the Cal.com embed configured in `dist/index.html` for `gerico-tl5oic/15min`.
+
+### Portfolio routes
+
+- `/` — compact main portfolio
+- `/resume/` — résumé preview and PDF download
+- `/allbuilds/` — all four selected builds
+- `/builds/fraudops/` — FraudOps case study, gallery, and demo video
+- `/builds/nmis/` — NMIS case study, gallery, and user manual
+- `/builds/yearbook/` — Yearbook Management System case study
+- `/builds/anti-procrastination/` — Anti-Procrastination System case study
+
+Build screenshots and supporting files are organized under `dist/assets/builds`. The résumé PDF and its browser-friendly preview are in `dist/assets/resume`.
 
 ### Portrait and animated character
 

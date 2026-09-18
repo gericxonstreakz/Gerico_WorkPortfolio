@@ -16,7 +16,7 @@
     />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&amp;display=swap" />
-    <link rel="stylesheet" href="./styles.css?v=20260918-4" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-5" />
     <script>
       (function (C, A, L) {
         const queue = function (api, args) { api.q.push(args); };
@@ -52,7 +52,7 @@
       Cal.config.forwardQueryParams = true;
       Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
     </script>
-    <script src="./script.js?v=20260918-3" defer></script>
+    <script src="./script.js?v=20260918-4" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -201,6 +201,7 @@
             <div><dt>Specialty</dt><dd class="specialty-lines"><span>Fraud &amp; Risk Operations Analyst</span><span>Legal VA</span><span>Software Engineer</span></dd></div>
             <div><dt>Status</dt><dd><span class="status-pip"></span> Open to work</dd></div>
           </dl>
+          <a class="profile-resume-button" href="./resume/">View Resume <span aria-hidden="true">↗</span></a>
           <div class="profile-pixels" aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span>
             <span></span><span></span><span></span><span></span><span></span>
@@ -213,30 +214,60 @@
               <p class="eyebrow">SELECTED BUILDS</p>
               <h2 id="projects-title">Recent work</h2>
             </div>
-            <a class="text-link" href="https://github.com/gericxonstreakz" target="_blank" rel="noreferrer">All builds ↗</a>
+            <a class="text-link" href="./allbuilds/">All builds ↗</a>
           </div>
 
           <div class="project-list">
-            <article class="project-row">
-              <div class="project-number" aria-hidden="true">01</div>
-              <div class="project-copy">
-                <div class="project-meta"><span>WEB APP</span><span>2026</span></div>
-                <h3>Craftboard</h3>
-                <p>A calm project workspace that turns messy ideas into focused, trackable quests.</p>
-                <div class="tags"><span>React</span><span>Node.js</span><span>PostgreSQL</span></div>
+            <article class="project-row project-build-card">
+              <div class="project-preview-wrap">
+                <img class="project-preview" src="./assets/builds/fraudops/1.png" alt="FraudOps system preview" />
+                <span class="project-number" aria-hidden="true">01</span>
               </div>
-              <a class="project-link" href="#contact" aria-label="Ask about the Craftboard project">↗</a>
+              <div class="project-copy">
+                <div class="project-meta"><span>WORK PROJECT</span><span>NZXT / WHIM</span></div>
+                <h3>FraudOps</h3>
+                <p>A fraud and risk operations system built to centralize fraud data, strengthen loss prevention, identify emerging fraud trends, and support revenue generation and recovery.</p>
+              </div>
+              <a class="project-link" href="./builds/fraudops/" aria-label="View the FraudOps case study">↗</a>
             </article>
 
-            <article class="project-row">
-              <div class="project-number project-number-gold" aria-hidden="true">02</div>
-              <div class="project-copy">
-                <div class="project-meta"><span>DESIGN SYSTEM</span><span>2025</span></div>
-                <h3>Biome UI</h3>
-                <p>A reusable component library built for speed, consistency, and accessible interaction.</p>
-                <div class="tags"><span>TypeScript</span><span>Storybook</span><span>Figma</span></div>
+            <article class="project-row project-build-card">
+              <div class="project-preview-wrap">
+                <img class="project-preview" src="./assets/builds/nmis/1.png" alt="NMIS meat profiling website preview" />
+                <span class="project-number project-number-gold" aria-hidden="true">02</span>
               </div>
-              <a class="project-link" href="#contact" aria-label="Ask about the Biome UI project">↗</a>
+              <div class="project-copy">
+                <div class="project-meta"><span>GOVERNMENT PROJECT</span><span>DOST</span></div>
+                <h3>NMIS Website</h3>
+                <p>A meat supply chain system built to support government operations through centralized data tracking, predictive analysis, and geospatial data visualization.</p>
+              </div>
+              <a class="project-link" href="./builds/nmis/" aria-label="View the NMIS Website case study">↗</a>
+            </article>
+
+            <article class="project-row project-build-card">
+              <div class="project-preview-wrap">
+                <img class="project-preview" src="./assets/builds/yearbook/1.png" alt="Yearbook Management System preview" />
+                <span class="project-number" aria-hidden="true">03</span>
+              </div>
+              <div class="project-copy">
+                <div class="project-meta"><span>UNIVERSITY PROJECT</span><span>VOYAGER YEARBOOK</span></div>
+                <h3>Yearbook Management System</h3>
+                <p>A centralized management system for handling student records, yearbook content, submissions, and production-related data in one platform.</p>
+              </div>
+              <a class="project-link" href="./builds/yearbook/" aria-label="View the Yearbook Management System case study">↗</a>
+            </article>
+
+            <article class="project-row project-build-card">
+              <div class="project-preview-wrap">
+                <img class="project-preview" src="./assets/builds/anti-procrastination/1.png" alt="Anti-Procrastination System preview" />
+                <span class="project-number project-number-gold" aria-hidden="true">04</span>
+              </div>
+              <div class="project-copy">
+                <div class="project-meta"><span>UNIVERSITY PROJECT</span><span>PRODUCTIVITY</span></div>
+                <h3>Anti-Procrastination System</h3>
+                <p>A productivity system designed to help users manage tasks, track deadlines and progress, prioritize responsibilities, and maintain consistent study or work habits.</p>
+              </div>
+              <a class="project-link" href="./builds/anti-procrastination/" aria-label="View the Anti-Procrastination System case study">↗</a>
             </article>
           </div>
         </section>
@@ -245,12 +276,16 @@
           <div class="card-heading">
             <div>
               <p class="eyebrow">CURRENT QUEST</p>
-              <h2 id="currently-title">Risk Analyst / Tech Support</h2>
+              <h2 id="currently-title" data-quest-role>Risk Analyst / Tech Support</h2>
             </div>
-            <span class="signal" aria-label="Currently employed"></span>
+            <button class="quest-toggle" type="button" data-quest-toggle aria-label="Show next work experience" title="Show next work experience">
+              <span data-quest-count>01 / 04</span><span aria-hidden="true">↻</span>
+            </button>
           </div>
-          <p class="current-company">Currently working at <strong>Whim</strong></p>
-          <div class="employment-meta"><span>STARTED</span><strong>APR 2026 — PRESENT</strong></div>
+          <div data-quest-content aria-live="polite">
+            <p class="current-company"><span data-quest-tense>Currently working at</span> <strong data-quest-company>Whim</strong></p>
+            <div class="employment-meta"><span>STARTED</span><strong data-quest-period>APR 2026 — PRESENT</strong></div>
+          </div>
         </section>
 
         <section class="card principles-card reveal" aria-labelledby="principles-title">

@@ -13,6 +13,61 @@ const localZone = document.querySelector('[data-local-zone]');
 const localOffset = document.querySelector('[data-local-offset]');
 const timeRelation = document.querySelector('[data-time-relation]');
 const panels = [...document.querySelectorAll('.card')];
+const questToggle = document.querySelector('[data-quest-toggle]');
+const questRole = document.querySelector('[data-quest-role]');
+const questTense = document.querySelector('[data-quest-tense]');
+const questCompany = document.querySelector('[data-quest-company]');
+const questPeriod = document.querySelector('[data-quest-period]');
+const questCount = document.querySelector('[data-quest-count]');
+const questContent = document.querySelector('[data-quest-content]');
+
+const workExperience = [
+  {
+    role: 'Risk Analyst / Tech Support',
+    tense: 'Currently working at',
+    company: 'Whim',
+    period: 'APR 2026 — PRESENT',
+  },
+  {
+    role: 'Fraud Analyst / Technical Support (Tier 2)',
+    tense: 'Previously working at',
+    company: 'NZXT, Inc.',
+    period: 'NOV 2024 — APR 2026',
+  },
+  {
+    role: 'Software Engineer (Internship)',
+    tense: 'Previously working at',
+    company: 'Infosoft Consulting Corp',
+    period: 'JAN 2024 — OCT 2024',
+  },
+  {
+    role: 'Fraud Analyst / Legal VA',
+    tense: 'Previously working at',
+    company: 'The VA Hub US',
+    period: 'JUN 2023 — JAN 2024',
+  },
+];
+
+let activeExperience = 0;
+
+const showExperience = (index) => {
+  const experience = workExperience[index];
+  if (!experience || !questRole || !questTense || !questCompany || !questPeriod || !questCount) return;
+  questContent?.classList.add('is-changing');
+  window.setTimeout(() => {
+    questRole.textContent = experience.role;
+    questTense.textContent = experience.tense;
+    questCompany.textContent = experience.company;
+    questPeriod.textContent = experience.period;
+    questCount.textContent = `${String(index + 1).padStart(2, '0')} / ${String(workExperience.length).padStart(2, '0')}`;
+    questContent?.classList.remove('is-changing');
+  }, 110);
+};
+
+questToggle?.addEventListener('click', () => {
+  activeExperience = (activeExperience + 1) % workExperience.length;
+  showExperience(activeExperience);
+});
 
 const setTheme = (theme) => {
   const isDaylight = theme === 'daylight';
