@@ -372,6 +372,7 @@ if (avatarStage) {
 }
 
 if (francoisRoamer && francoisMessage) {
+  const francoisSprite = francoisRoamer.querySelector('.francois-sprite');
   const messages = [
     "I'm Francois!",
     'I am his loyal friend.',
@@ -379,56 +380,55 @@ if (francoisRoamer && francoisMessage) {
     'Walk with me!',
     'Keep exploring!',
   ];
-  const stateClasses = ['is-walking', 'is-slowing', 'is-standing', 'is-sitting', 'is-idle'];
+  const clips = {
+    walk: { row: 0, frames: 4, fps: 5, loop: true, hold: [3.2, 7.8] },
+    idle: { row: 1, frames: 4, fps: 5, loop: true, hold: [1.4, 4.2] },
+    sit: { row: 2, frames: 4, fps: 4, loop: true, hold: [4.5, 10] },
+    'sit-down': { row: 3, frames: 4, fps: 7, loop: false },
+  };
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const scheduledTimers = new Set();
   let messageIndex = -1;
   let messageTimer;
   let pointerWasOverDog = false;
-  let currentPosition = { x: 20, y: Math.max(96, window.innerHeight - 118) };
+  let clip = 'walk';
+  let clipReversed = false;
+  let clipTime = 0;
+  let remaining = 0;
+  let direction = 1;
+  let x = 20;
+  let lastFrameTime = 0;
+  let animationFrame = 0;
 
   const randomBetween = (minimum, maximum) => minimum + Math.random() * (maximum - minimum);
   const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum);
 
-  const schedule = (callback, delay) => {
-    const timer = window.setTimeout(() => {
-      scheduledTimers.delete(timer);
-      callback();
-    }, delay);
-    scheduledTimers.add(timer);
-    return timer;
+  const edgeMargin = () => (window.innerWidth < 520 ? 4 : 12);
+  const maxX = () => Math.max(edgeMargin(), window.innerWidth - francoisRoamer.offsetWidth - edgeMargin());
+
+  const frameIndexFor = () => {
+    const config = clips[clip];
+    const rawFrame = Math.floor(clipTime * config.fps);
+    const index = config.loop
+      ? ((rawFrame % config.frames) + config.frames) % config.frames
+      : clamp(rawFrame, 0, config.frames - 1);
+    return clipReversed ? config.frames - 1 - index : index;
   };
 
-  const clearScheduledTimers = () => {
-    scheduledTimers.forEach((timer) => window.clearTimeout(timer));
-    scheduledTimers.clear();
+  const paintFrame = () => {
+    if (!francoisSprite) return;
+    const config = clips[clip];
+    const column = frameIndexFor();
+    francoisSprite.style.backgroundPosition = `${(column * 100) / 3}% ${(config.row * 100) / 3}%`;
   };
 
-  const getMovementBounds = () => {
-    const dogWidth = francoisRoamer.offsetWidth || 116;
-    const dogHeight = francoisRoamer.offsetHeight || 88;
-    const generousMargin = window.innerWidth >= 360 ? Math.min(72, window.innerWidth * 0.12) : 10;
-    const minimumX = Math.min(generousMargin, Math.max(8, window.innerWidth - dogWidth - 8));
-    const maximumX = Math.max(minimumX, window.innerWidth - dogWidth - generousMargin);
-    const minimumY = Math.min(104, Math.max(8, window.innerHeight - dogHeight - 8));
-    const maximumY = Math.max(minimumY, window.innerHeight - dogHeight - 12);
-    return { minimumX, maximumX, minimumY, maximumY };
-  };
-
-  const setState = (state) => {
-    francoisRoamer.classList.remove(...stateClasses, 'is-looking');
-    francoisRoamer.classList.add(`is-${state}`);
-    francoisRoamer.dataset.state = state;
-  };
-
-  const moveTo = (position, duration = 0, timing = 'linear') => {
-    francoisRoamer.style.transitionDuration = `${Math.max(0, Math.round(duration))}ms`;
-    francoisRoamer.style.transitionTimingFunction = timing;
-    window.requestAnimationFrame(() => {
-      francoisRoamer.style.setProperty('--dog-x', `${position.x}px`);
-      francoisRoamer.style.setProperty('--dog-y', `${position.y}px`);
-    });
-    currentPosition = position;
+  const setClip = (nextClip, reversed = false) => {
+    clip = nextClip;
+    clipReversed = reversed;
+    clipTime = 0;
+    const config = clips[clip];
+    remaining = config.loop ? randomBetween(...config.hold) : config.frames / config.fps;
+    francoisRoamer.dataset.state = clipReversed ? 'stand-up' : clip;
+    paintFrame();
   };
 
   const showFrancoisMessage = () => {
@@ -444,79 +444,72 @@ if (francoisRoamer && francoisMessage) {
     return clientX >= bounds.left && clientX <= bounds.right && clientY >= bounds.top && clientY <= bounds.bottom;
   };
 
-  const startWalking = () => {
-    if (prefersReducedMotion.matches) {
-      setState('idle');
-      return;
+  const advanceBehavior = () => {
+    const roll = Math.random();
+    if (clip === 'sit') {
+      setClip('sit-down', true);
+    } else if (clip === 'sit-down') {
+      setClip(clipReversed ? 'idle' : 'sit');
+    } else if (clip === 'walk') {
+      setClip(roll < 0.78 ? 'idle' : 'walk');
+    } else if (roll < 0.56) {
+      setClip('walk');
+    } else if (roll < 0.82) {
+      setClip('sit-down');
+    } else {
+      setClip('idle');
     }
 
-    const bounds = getMovementBounds();
-    let destination = {
-      x: randomBetween(bounds.minimumX, bounds.maximumX),
-      y: randomBetween(bounds.minimumY, bounds.maximumY),
-    };
-    let distance = Math.hypot(destination.x - currentPosition.x, destination.y - currentPosition.y);
-
-    for (let attempt = 0; attempt < 4 && distance < 120; attempt += 1) {
-      destination = {
-        x: randomBetween(bounds.minimumX, bounds.maximumX),
-        y: randomBetween(bounds.minimumY, bounds.maximumY),
-      };
-      distance = Math.hypot(destination.x - currentPosition.x, destination.y - currentPosition.y);
+    if ((clip === 'idle' || clip === 'sit') && Math.random() > 0.58) {
+      showFrancoisMessage();
     }
-
-    const facing = destination.x >= currentPosition.x ? 1 : -1;
-    francoisRoamer.style.setProperty('--dog-facing', String(facing));
-    const walkingDuration = clamp(distance * randomBetween(11, 15), 3600, 8200);
-    const fastDuration = walkingDuration * 0.78;
-    const slowDuration = walkingDuration - fastDuration;
-    const slowingPoint = {
-      x: currentPosition.x + (destination.x - currentPosition.x) * 0.84,
-      y: currentPosition.y + (destination.y - currentPosition.y) * 0.84,
-    };
-
-    setState('walking');
-    moveTo(slowingPoint, fastDuration, 'linear');
-
-    schedule(() => {
-      setState('slowing');
-      moveTo(destination, slowDuration, 'cubic-bezier(0.16, 0.84, 0.3, 1)');
-
-      schedule(() => {
-        setState('standing');
-        schedule(() => {
-          setState('sitting');
-          schedule(() => {
-            setState('idle');
-            if (Math.random() > 0.45) showFrancoisMessage();
-
-            const pauseDuration = randomBetween(2800, 7200);
-            schedule(() => {
-              francoisRoamer.classList.add('is-looking');
-              schedule(() => francoisRoamer.classList.remove('is-looking'), 1200);
-            }, Math.min(randomBetween(700, 2200), pauseDuration - 1300));
-
-            schedule(() => {
-              setState('standing');
-              schedule(startWalking, randomBetween(420, 760));
-            }, pauseDuration);
-          }, 430);
-        }, 280);
-      }, slowDuration);
-    }, fastDuration);
   };
 
-  const placeFrancoisSafely = (resumeWalking = true) => {
-    clearScheduledTimers();
-    const bounds = getMovementBounds();
-    currentPosition = {
-      x: clamp(currentPosition.x, bounds.minimumX, bounds.maximumX),
-      y: clamp(currentPosition.y, bounds.minimumY, bounds.maximumY),
-    };
-    setState('standing');
-    moveTo(currentPosition, 260, 'ease-out');
-    if (resumeWalking && !prefersReducedMotion.matches) schedule(startWalking, 650);
-    if (prefersReducedMotion.matches) schedule(() => setState('idle'), 300);
+  const stopAnimation = () => {
+    if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    animationFrame = 0;
+  };
+
+  const tick = (now) => {
+    animationFrame = window.requestAnimationFrame(tick);
+    const step = Math.min(0.05, Math.max(0, (now - lastFrameTime) / 1000));
+    lastFrameTime = now;
+    clipTime += step;
+    remaining -= step;
+
+    paintFrame();
+
+    if (clip === 'walk') {
+      // Match one four-frame stride to roughly one third of the dog's width.
+      // This keeps the paws visually planted instead of cycling faster than travel.
+      const speed = clamp(francoisRoamer.offsetHeight * 0.5, 34, 46);
+      x += direction * speed * step;
+      const limit = maxX();
+      if (x >= limit) {
+        x = limit;
+        direction = -1;
+      } else if (x <= edgeMargin()) {
+        x = edgeMargin();
+        direction = 1;
+      }
+      francoisRoamer.style.setProperty('--dog-facing', String(direction));
+    }
+
+    francoisRoamer.style.transform = `translate3d(${Math.round(x)}px,0,0)`;
+    const finishedStride = clip !== 'walk' || frameIndexFor() === 0;
+    if (remaining <= 0 && finishedStride) advanceBehavior();
+  };
+
+  const startAnimation = () => {
+    stopAnimation();
+    if (prefersReducedMotion.matches || document.hidden) return;
+    lastFrameTime = performance.now();
+    animationFrame = window.requestAnimationFrame(tick);
+  };
+
+  const placeFrancoisSafely = () => {
+    x = clamp(x, edgeMargin(), maxX());
+    francoisRoamer.style.transform = `translate3d(${Math.round(x)}px,0,0)`;
   };
 
   document.addEventListener('pointermove', (event) => {
@@ -529,23 +522,41 @@ if (francoisRoamer && francoisMessage) {
     if (pointIsOverDog(event.clientX, event.clientY)) showFrancoisMessage();
   });
 
-  window.addEventListener('resize', () => placeFrancoisSafely());
-  prefersReducedMotion.addEventListener('change', () => placeFrancoisSafely());
+  window.addEventListener('resize', placeFrancoisSafely);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAnimation();
+    else startAnimation();
+  });
+  prefersReducedMotion.addEventListener('change', () => {
+    if (prefersReducedMotion.matches) {
+      stopAnimation();
+      setClip('idle');
+    } else {
+      setClip('walk');
+      startAnimation();
+    }
+  });
 
-  const initialBounds = getMovementBounds();
-  currentPosition = {
-    x: initialBounds.minimumX,
-    y: initialBounds.maximumY,
-  };
-  moveTo(currentPosition);
+  x = randomBetween(edgeMargin(), maxX());
+  direction = Math.random() < 0.5 ? -1 : 1;
+  francoisRoamer.style.setProperty('--dog-facing', String(direction));
+  placeFrancoisSafely();
   if (prefersReducedMotion.matches) {
-    setState('idle');
+    setClip('idle');
   } else {
-    schedule(startWalking, 500);
+    setClip('walk');
+    startAnimation();
   }
 }
 
 const revealItems = document.querySelectorAll('.reveal');
+const backToSpawn = document.querySelector('[data-scroll-top]');
+
+if (backToSpawn) {
+  backToSpawn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver(

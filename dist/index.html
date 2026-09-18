@@ -16,7 +16,7 @@
     />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&amp;display=swap" />
-    <link rel="stylesheet" href="./styles.css?v=20260918-10" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-12" />
     <script>
       (function (C, A, L) {
         const queue = function (api, args) { api.q.push(args); };
@@ -52,13 +52,13 @@
       Cal.config.forwardQueryParams = true;
       Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
     </script>
-    <script src="./script.js?v=20260918-8" defer></script>
+    <script src="./script.js?v=20260918-11" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header shell" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="Gerico Alagon, home">
+      <a class="brand" href="./" aria-label="Gerico Alagon, home">
         <span class="brand-mark" aria-hidden="true"></span>
         <span>GERICO<span class="accent">.DEV</span></span>
       </a>
@@ -82,7 +82,7 @@
     </header>
 
     <main id="main" class="shell" tabindex="-1">
-      <div class="portfolio-grid" id="top">
+      <div class="portfolio-grid">
         <section class="card hero-card reveal" aria-labelledby="intro-title">
           <div class="hero-copy">
             <p class="eyebrow"><span class="status-pip"></span> PLAYER ONE / AVAILABLE</p>
@@ -390,20 +390,13 @@
     <footer class="site-footer shell">
       <p>© <span id="year">2026</span> Gerico Alagon</p>
       <p>Built block by block. No creepers were harmed.</p>
-      <a class="back-to-spawn" href="#top">Back to spawn ↑</a>
+      <button class="back-to-spawn" type="button" data-scroll-top>Back to spawn ↑</button>
     </footer>
 
-    <div class="francois-roamer is-walking" data-francois data-state="walking" aria-hidden="true">
+    <div class="francois-roamer" data-francois data-state="walk" aria-hidden="true">
       <span class="francois-message" data-francois-message>I'm Francois!</span>
       <span class="francois-shadow"></span>
-      <span class="francois-facing">
-        <span class="francois-body">
-          <span class="francois-tail"></span>
-          <img src="./assets/francois-voxel.png" alt="" />
-          <span class="francois-leg francois-leg-back"></span>
-          <span class="francois-leg francois-leg-front"></span>
-        </span>
-      </span>
+      <span class="francois-sprite"></span>
     </div>
   </body>
 </html>

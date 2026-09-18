@@ -1293,54 +1293,42 @@ h3 {
 }
 
 .francois-roamer {
-  --dog-x: 20px;
-  --dog-y: calc(100vh - 110px);
   --dog-facing: 1;
   position: fixed;
   z-index: 24;
-  top: 0;
+  bottom: 0;
   left: 0;
-  width: 116px;
-  height: 88px;
+  width: 126px;
+  height: 84px;
   pointer-events: none;
-  transform: translate3d(var(--dog-x), var(--dog-y), 0);
-  transition-property: transform;
-  transition-duration: 0ms;
-  transition-timing-function: linear;
+  transform: translate3d(20px, 0, 0);
+  transform-origin: 50% 100%;
   will-change: transform;
 }
 
-.francois-facing {
+.francois-sprite {
   position: absolute;
   inset: 0;
-  transform: scaleX(var(--dog-facing));
-  transform-origin: center bottom;
-  transition: transform 280ms ease-out;
-}
-
-.francois-body {
-  position: absolute;
-  inset: 0;
-  transform-origin: 50% 86%;
-  transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 260ms ease;
-}
-
-.francois-body img {
-  position: relative;
   z-index: 2;
   display: block;
-  width: 100%;
-  height: auto;
+  background-image: url("./assets/francois-atlas.png");
+  background-repeat: no-repeat;
+  background-size: 400% 400%;
+  background-position: 0 0;
+  transform: scaleX(var(--dog-facing));
+  transform-origin: center bottom;
   filter: drop-shadow(3px 4px 0 var(--shadow));
+  transition: transform 120ms linear;
+  will-change: background-position, transform;
 }
 
 .francois-shadow {
   position: absolute;
   z-index: 0;
-  right: 20px;
-  bottom: 5px;
-  left: 20px;
-  height: 8px;
+  right: 24px;
+  bottom: 2px;
+  left: 24px;
+  height: 7px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.28);
   filter: blur(2px);
@@ -1348,94 +1336,11 @@ h3 {
   transition: transform 300ms ease, opacity 300ms ease;
 }
 
-.francois-tail {
-  position: absolute;
-  z-index: 1;
-  top: 35px;
-  left: 14px;
-  width: 25px;
-  height: 9px;
-  background: #e7e4db;
-  border: 2px solid #bdb9b0;
-  transform: rotate(-20deg);
-  transform-origin: right center;
-  box-shadow: -7px -5px 0 -1px #f1eee7;
-}
-
-.francois-leg {
-  position: absolute;
-  z-index: 3;
-  bottom: 7px;
-  width: 10px;
-  height: 19px;
-  background: linear-gradient(to bottom, #f2efe8 0 68%, #d2cec5 68% 100%);
-  border: 1px solid rgba(100, 95, 88, 0.25);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
-  transform-origin: center top;
-  transition: opacity 180ms ease, transform 300ms ease;
-}
-
-.francois-leg-back {
-  left: 39px;
-}
-
-.francois-leg-front {
-  left: 72px;
-}
-
-.francois-roamer.is-walking .francois-body {
-  animation: francois-body-step 420ms steps(2, end) infinite;
-}
-
-.francois-roamer.is-walking .francois-leg-front {
-  animation: francois-front-step 420ms steps(2, end) infinite;
-}
-
-.francois-roamer.is-walking .francois-leg-back {
-  animation: francois-back-step 420ms steps(2, end) infinite;
-}
-
-.francois-roamer.is-walking .francois-tail,
-.francois-roamer.is-idle .francois-tail,
-.francois-roamer.is-looking .francois-tail {
-  animation: francois-tail-wag 360ms steps(2, end) infinite;
-}
-
-.francois-roamer.is-slowing .francois-body {
-  animation: francois-body-step 620ms steps(2, end) infinite;
-}
-
-.francois-roamer.is-slowing .francois-leg-front {
-  animation: francois-front-step 620ms steps(2, end) infinite;
-}
-
-.francois-roamer.is-slowing .francois-leg-back {
-  animation: francois-back-step 620ms steps(2, end) infinite;
-}
-
-.francois-roamer.is-standing .francois-body {
-  transform: translateY(1px) scaleY(0.98);
-}
-
-.francois-roamer.is-sitting .francois-body,
-.francois-roamer.is-idle .francois-body {
-  transform: translateY(10px) scaleY(0.86) rotate(-2deg);
-}
-
-.francois-roamer.is-sitting .francois-leg,
-.francois-roamer.is-idle .francois-leg {
-  opacity: 0;
-  transform: translateY(-4px) scaleY(0.55);
-}
-
-.francois-roamer.is-sitting .francois-shadow,
-.francois-roamer.is-idle .francois-shadow {
+.francois-roamer[data-state="sit"] .francois-shadow,
+.francois-roamer[data-state="sit-down"] .francois-shadow,
+.francois-roamer[data-state="stand-up"] .francois-shadow {
   opacity: 0.42;
-  transform: scaleX(0.86);
-}
-
-.francois-roamer.is-looking .francois-body {
-  animation: francois-look-around 1200ms ease-in-out 1;
+  transform: scaleX(0.82);
 }
 
 .francois-message {
@@ -1477,33 +1382,15 @@ h3 {
   transform: translate(-50%, 0);
 }
 
-@keyframes francois-body-step {
-  50% { transform: translateY(-3px) rotate(-1deg); }
-}
-
-@keyframes francois-front-step {
-  0%, 100% { transform: translateY(1px) rotate(-9deg); }
-  50% { transform: translateY(-5px) rotate(13deg); }
-}
-
-@keyframes francois-back-step {
-  0%, 100% { transform: translateY(-5px) rotate(13deg); }
-  50% { transform: translateY(1px) rotate(-9deg); }
-}
-
-@keyframes francois-tail-wag {
-  0%, 100% { transform: rotate(-28deg); }
-  50% { transform: rotate(10deg); }
-}
-
-@keyframes francois-look-around {
-  0%, 100% { transform: translateY(10px) scaleY(0.86) rotate(-2deg); }
-  35% { transform: translateY(9px) scaleY(0.86) rotate(3deg); }
-  70% { transform: translateY(10px) scaleY(0.86) rotate(-5deg); }
-}
-
 .back-to-spawn {
   display: none;
+  justify-self: end;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 body.has-page-scroll .back-to-spawn {
@@ -3144,29 +3031,8 @@ body.has-page-scroll .back-to-spawn {
   }
 
   .francois-roamer {
-    width: 96px;
-    height: 74px;
-  }
-
-  .francois-leg {
-    bottom: 5px;
-    width: 8px;
-    height: 15px;
-  }
-
-  .francois-leg-back {
-    left: 33px;
-  }
-
-  .francois-leg-front {
-    left: 59px;
-  }
-
-  .francois-tail {
-    top: 29px;
-    left: 12px;
-    width: 21px;
-    height: 8px;
+    width: 108px;
+    height: 72px;
   }
 
   .francois-message {
