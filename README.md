@@ -67,7 +67,7 @@ git push -u origin main
 
 Then select **GitHub Actions** under **Settings → Pages**.
 
-The portfolio is deployed at `https://gericoalagon.com/` through GitHub Pages. The repository's Pages workflow publishes the contents of `dist`, and `dist/CNAME` keeps the custom domain attached to each deployment.
+The portfolio is deployed at `https://gericxonstreakz.github.io/Gerico_WorkPortfolio/` through GitHub Pages. The repository's Pages workflow publishes the contents of `dist`.
 
 ## About the database
 
