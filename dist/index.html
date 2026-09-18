@@ -16,7 +16,7 @@
     />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&amp;display=swap" />
-    <link rel="stylesheet" href="./styles.css?v=20260918-5" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-6" />
     <script>
       (function (C, A, L) {
         const queue = function (api, args) { api.q.push(args); };
@@ -65,7 +65,7 @@
 
       <nav class="nav-links" aria-label="Portfolio sections">
         <a href="#projects">Builds</a>
-        <a href="#toolkit">Inventory</a>
+        <a href="./inventory/">Inventory</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -140,6 +140,7 @@
           </div>
         </section>
 
+        <div class="right-rail">
         <aside class="card toolkit-card reveal" id="toolkit" aria-labelledby="toolkit-title">
           <div class="card-heading">
             <div>
@@ -189,6 +190,33 @@
             <div class="progress-label"><span>Toolkit coverage</span><strong>68%</strong></div>
           </div>
         </aside>
+
+        <section class="card currently-card reveal" aria-labelledby="currently-title">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">CURRENT QUEST</p>
+              <h2 id="currently-title" data-quest-role>Risk Analyst / Tech Support</h2>
+            </div>
+            <button class="quest-toggle" type="button" data-quest-toggle aria-label="Show next work experience" title="Show next work experience">
+              <span data-quest-count>01 / 04</span><span aria-hidden="true">↻</span>
+            </button>
+          </div>
+          <div data-quest-content aria-live="polite">
+            <p class="current-company"><span data-quest-tense>Currently working at</span> <strong data-quest-company>Whim</strong></p>
+            <div class="employment-meta"><span>STARTED</span><strong data-quest-period>APR 2026 — PRESENT</strong></div>
+          </div>
+        </section>
+
+        <section class="card principles-card reveal" aria-labelledby="principles-title">
+          <p class="eyebrow">HOW I WORK</p>
+          <h2 id="principles-title">Simple rules. Solid builds.</h2>
+          <ol class="principle-list">
+            <li><span>01</span><p><strong>Establish client communication.</strong></p></li>
+            <li><span>02</span><p><strong>Study entire workflow.</strong></p></li>
+            <li><span>03</span><p><strong>Build, Improve, and Make it Last.</strong></p></li>
+          </ol>
+        </section>
+        </div>
 
         <section class="card profile-card reveal" aria-labelledby="profile-title">
           <p class="eyebrow">PLAYER PROFILE</p>
@@ -270,32 +298,6 @@
               <a class="project-link" href="./builds/anti-procrastination/" aria-label="View the Anti-Procrastination System case study">↗</a>
             </article>
           </div>
-        </section>
-
-        <section class="card currently-card reveal" aria-labelledby="currently-title">
-          <div class="card-heading">
-            <div>
-              <p class="eyebrow">CURRENT QUEST</p>
-              <h2 id="currently-title" data-quest-role>Risk Analyst / Tech Support</h2>
-            </div>
-            <button class="quest-toggle" type="button" data-quest-toggle aria-label="Show next work experience" title="Show next work experience">
-              <span data-quest-count>01 / 04</span><span aria-hidden="true">↻</span>
-            </button>
-          </div>
-          <div data-quest-content aria-live="polite">
-            <p class="current-company"><span data-quest-tense>Currently working at</span> <strong data-quest-company>Whim</strong></p>
-            <div class="employment-meta"><span>STARTED</span><strong data-quest-period>APR 2026 — PRESENT</strong></div>
-          </div>
-        </section>
-
-        <section class="card principles-card reveal" aria-labelledby="principles-title">
-          <p class="eyebrow">HOW I WORK</p>
-          <h2 id="principles-title">Simple rules. Solid builds.</h2>
-          <ol class="principle-list">
-            <li><span>01</span><p><strong>Establish client communication.</strong></p></li>
-            <li><span>02</span><p><strong>Study entire workflow.</strong></p></li>
-            <li><span>03</span><p><strong>Build, Improve, and Make it Last.</strong></p></li>
-          </ol>
         </section>
 
         <section class="card time-card reveal" aria-labelledby="time-title">

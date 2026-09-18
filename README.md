@@ -16,6 +16,7 @@ The colors, spacing, compact single-screen layout, Satoshi typography, case-stud
 ### Portfolio routes
 
 - `/` — compact main portfolio
+- `/inventory/` — detailed skills, tools, and usage guide
 - `/resume/` — résumé preview and PDF download
 - `/allbuilds/` — all four selected builds
 - `/builds/fraudops/` — FraudOps case study, gallery, and demo video

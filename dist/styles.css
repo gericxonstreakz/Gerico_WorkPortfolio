@@ -194,6 +194,10 @@ button {
   padding: 8px 0 24px;
 }
 
+.right-rail {
+  display: contents;
+}
+
 .card {
   position: relative;
   overflow: hidden;
@@ -1398,9 +1402,9 @@ body.has-page-scroll .back-to-spawn {
       auto
       auto;
     grid-template-areas:
-      "hero hero hero hero hero hero hero hero hero toolkit toolkit toolkit"
-      "profile profile profile projects projects projects projects projects projects currently currently currently"
-      "profile profile profile projects projects projects projects projects projects principles principles principles"
+      "hero hero hero hero hero hero hero hero hero right right right"
+      "profile profile profile projects projects projects projects projects projects right right right"
+      "profile profile profile projects projects projects projects projects projects right right right"
       "time time time time stats stats stats palette palette contact contact contact";
   }
 
@@ -1427,6 +1431,21 @@ body.has-page-scroll .back-to-spawn {
   .hero-card {
     grid-area: hero;
     grid-template-columns: minmax(0, 1.6fr) minmax(250px, 0.72fr);
+  }
+
+  .right-rail {
+    grid-area: right;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto auto;
+    gap: 12px;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .right-rail .toolkit-card,
+  .right-rail .currently-card,
+  .right-rail .principles-card {
+    grid-area: auto;
   }
 
   .hero-copy {
@@ -2081,14 +2100,20 @@ body.has-page-scroll .back-to-spawn {
   }
 
   .project-build-card {
-    grid-template-columns: 68px minmax(0, 1fr);
-    min-height: 102px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 96px auto;
+    min-height: 188px;
     gap: 8px;
     padding: 7px;
   }
 
   .project-preview-wrap {
-    min-height: 86px;
+    min-height: 96px;
+    background: #eef0f3;
+  }
+
+  .project-preview {
+    object-fit: contain;
   }
 
   .project-preview-wrap .project-number {
@@ -2464,8 +2489,116 @@ body.has-page-scroll .back-to-spawn {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 8.5;
-  object-fit: cover;
+  object-fit: contain;
+  background: #eef0f3;
   border-bottom: 1px solid var(--line);
+}
+
+/* Expanded Inventory guide. */
+.inventory-page-hero {
+  padding: clamp(34px, 6vw, 72px);
+}
+
+.inventory-page-hero h1 {
+  max-width: 850px;
+  margin-bottom: 18px;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 0.94;
+}
+
+.inventory-section-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.inventory-section-card {
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.inventory-section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.inventory-section-heading h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 3vw, 2.5rem);
+}
+
+.inventory-section-heading p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.skill-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.skill-detail-grid:has(> .skill-detail-item:nth-child(4):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.skill-detail-grid > .skill-detail-item:nth-child(5):last-child {
+  grid-column: span 2;
+}
+
+.skill-detail-item {
+  min-height: 142px;
+  padding: 18px;
+  background: var(--surface-2);
+}
+
+.skill-detail-item.is-tool {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 13px;
+  align-items: start;
+}
+
+.tool-logo {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--logo-color, var(--green));
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+
+.tool-logo svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.skill-detail-copy h3,
+.skill-detail-item > h3 {
+  margin: 0 0 7px;
+  font-size: 0.96rem;
+  line-height: 1.2;
+}
+
+.skill-detail-copy p,
+.skill-detail-item > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.48;
 }
 
 .build-index-copy {
@@ -2558,6 +2691,15 @@ body.has-page-scroll .back-to-spawn {
   .detail-meta-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .inventory-section-heading,
+  .skill-detail-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .inventory-section-heading > :first-child {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 640px) {
@@ -2582,8 +2724,18 @@ body.has-page-scroll .back-to-spawn {
   }
 
   .detail-meta-grid,
-  .gallery-grid {
+  .gallery-grid,
+  .inventory-section-heading,
+  .skill-detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  .skill-detail-item {
+    min-height: 0;
+  }
+
+  .skill-detail-grid > .skill-detail-item:nth-child(5):last-child {
+    grid-column: auto;
   }
 
   .detail-hero-media {
