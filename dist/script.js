@@ -82,8 +82,9 @@ paletteButtons.forEach((button) => {
 
 let panelAudioContext;
 let panelHoverAudio;
-let panelSoundsEnabled = false;
 let soundPreference = localStorage.getItem('portfolio-sound') !== 'off';
+let panelSoundsEnabled = soundPreference;
+let panelAudioUnlocked = false;
 
 const getPanelAudioContext = () => {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -174,6 +175,7 @@ const updateSoundControl = () => {
 
 const enablePanelSounds = async (playConfirmation = false) => {
   panelSoundsEnabled = true;
+  panelAudioUnlocked = true;
   updateSoundControl();
   const audioContext = getPanelAudioContext();
   getPanelHoverAudio();
@@ -199,12 +201,12 @@ soundToggle?.addEventListener('click', async () => {
 });
 
 window.addEventListener('pointerdown', (event) => {
-  if (!soundPreference || panelSoundsEnabled || event.target.closest('.sound-toggle')) return;
+  if (!soundPreference || panelAudioUnlocked || event.target.closest('.sound-toggle')) return;
   enablePanelSounds();
 }, { passive: true });
 
 window.addEventListener('keydown', (event) => {
-  if (!soundPreference || panelSoundsEnabled || event.target.closest('.sound-toggle')) return;
+  if (!soundPreference || panelAudioUnlocked || event.target.closest('.sound-toggle')) return;
   enablePanelSounds();
 });
 
