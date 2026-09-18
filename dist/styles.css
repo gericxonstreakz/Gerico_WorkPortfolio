@@ -1509,7 +1509,7 @@ body.has-page-scroll .back-to-spawn {
     grid-area: toolkit;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto repeat(3, minmax(0, 1fr)) auto;
+    grid-template-rows: auto repeat(4, minmax(0, 1fr)) auto;
     align-content: stretch;
     column-gap: 8px;
     row-gap: 4px;
@@ -1694,28 +1694,28 @@ body.has-page-scroll .back-to-spawn {
 
   .currently-card {
     grid-area: currently;
-    padding: 11px 13px;
+    padding: 8px 11px;
   }
 
   .currently-card h2 {
-    margin-bottom: 4px;
-    font-size: 0.9rem;
+    margin-bottom: 2px;
+    font-size: 0.82rem;
   }
 
   .currently-card p {
     margin: 0;
-    font-size: 0.72rem;
+    font-size: 0.66rem;
     line-height: 1.25;
   }
 
   .employment-meta {
-    margin-top: 6px;
-    padding-top: 5px;
-    font-size: 0.52rem;
+    margin-top: 4px;
+    padding-top: 4px;
+    font-size: 0.48rem;
   }
 
   .employment-meta strong {
-    font-size: 0.54rem;
+    font-size: 0.50rem;
   }
 
   .progress-track {
@@ -1729,22 +1729,22 @@ body.has-page-scroll .back-to-spawn {
 
   .principles-card {
     grid-area: principles;
-    padding: 13px 15px;
+    padding: 9px 12px;
   }
 
   .principles-card h2 {
-    margin-bottom: 4px;
-    font-size: 1.08rem;
+    margin-bottom: 2px;
+    font-size: 0.92rem;
   }
 
   .principle-list li {
     grid-template-columns: 30px 1fr;
-    gap: 7px;
-    padding: 4px 0;
+    gap: 6px;
+    padding: 2px 0;
   }
 
   .principle-list li span {
-    font-size: 0.75rem;
+    font-size: 0.68rem;
   }
 
   .principle-list p {
@@ -1753,7 +1753,7 @@ body.has-page-scroll .back-to-spawn {
   }
 
   .principle-list strong {
-    font-size: 0.78rem;
+    font-size: 0.70rem;
   }
 
   .stats-card {

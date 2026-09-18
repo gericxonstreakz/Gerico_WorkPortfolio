@@ -4,7 +4,7 @@ A responsive one-page portfolio with an inventory-style toolkit, animated Minecr
 
 ## Make it yours
 
-The main identity and contact details are already personalized for Gerico Alagon. Open `dist/index.html` in a text editor whenever you want to update:
+The main identity, Legal VA specialty, technical skills, and contact details are already personalized for Gerico Alagon. Open `dist/index.html` in a text editor whenever you want to update:
 
 - the introduction or professional roles
 - the Gmail, GitHub, LinkedIn, and Instagram links
