@@ -16,7 +16,7 @@
     />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&amp;display=swap" />
-    <link rel="stylesheet" href="./styles.css?v=20260918-9" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-10" />
     <script>
       (function (C, A, L) {
         const queue = function (api, args) { api.q.push(args); };
@@ -52,7 +52,7 @@
       Cal.config.forwardQueryParams = true;
       Cal.ns['15min']('ui', { hideEventTypeDetails: false, layout: 'month_view' });
     </script>
-    <script src="./script.js?v=20260918-7" defer></script>
+    <script src="./script.js?v=20260918-8" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -393,13 +393,17 @@
       <a class="back-to-spawn" href="#top">Back to spawn ↑</a>
     </footer>
 
-    <section class="francois-zone shell" aria-label="Francois, Gerico's portfolio companion">
-      <div class="francois-track">
-        <button class="francois-character" type="button" data-francois aria-describedby="francois-message" aria-label="Meet Francois">
-          <span class="francois-message" id="francois-message" data-francois-message role="status" aria-live="polite">I'm Francois!</span>
-          <span class="francois-sprite" aria-hidden="true"><img src="./assets/francois-voxel.png" alt="" /></span>
-        </button>
-      </div>
-    </section>
+    <div class="francois-roamer is-walking" data-francois data-state="walking" aria-hidden="true">
+      <span class="francois-message" data-francois-message>I'm Francois!</span>
+      <span class="francois-shadow"></span>
+      <span class="francois-facing">
+        <span class="francois-body">
+          <span class="francois-tail"></span>
+          <img src="./assets/francois-voxel.png" alt="" />
+          <span class="francois-leg francois-leg-back"></span>
+          <span class="francois-leg francois-leg-front"></span>
+        </span>
+      </span>
+    </div>
   </body>
 </html>

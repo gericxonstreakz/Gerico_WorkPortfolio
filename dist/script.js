@@ -28,7 +28,7 @@ const contactDialogOpen = document.querySelector('[data-contact-dialog-open]');
 const contactDialogClose = document.querySelector('[data-contact-dialog-close]');
 const dialogMeetButton = contactDialog?.querySelector('[data-cal-link]');
 const dialogEmailLink = contactDialog?.querySelector('a[href*="mail.google.com"]');
-const francoisButton = document.querySelector('[data-francois]');
+const francoisRoamer = document.querySelector('[data-francois]');
 const francoisMessage = document.querySelector('[data-francois-message]');
 
 const workExperience = [
@@ -371,7 +371,7 @@ if (avatarStage) {
   }
 }
 
-if (francoisButton && francoisMessage) {
+if (francoisRoamer && francoisMessage) {
   const messages = [
     "I'm Francois!",
     'I am his loyal friend.',
@@ -379,20 +379,170 @@ if (francoisButton && francoisMessage) {
     'Walk with me!',
     'Keep exploring!',
   ];
+  const stateClasses = ['is-walking', 'is-slowing', 'is-standing', 'is-sitting', 'is-idle'];
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const scheduledTimers = new Set();
   let messageIndex = -1;
   let messageTimer;
+  let pointerWasOverDog = false;
+  let currentPosition = { x: 20, y: Math.max(96, window.innerHeight - 118) };
+
+  const randomBetween = (minimum, maximum) => minimum + Math.random() * (maximum - minimum);
+  const clamp = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum);
+
+  const schedule = (callback, delay) => {
+    const timer = window.setTimeout(() => {
+      scheduledTimers.delete(timer);
+      callback();
+    }, delay);
+    scheduledTimers.add(timer);
+    return timer;
+  };
+
+  const clearScheduledTimers = () => {
+    scheduledTimers.forEach((timer) => window.clearTimeout(timer));
+    scheduledTimers.clear();
+  };
+
+  const getMovementBounds = () => {
+    const dogWidth = francoisRoamer.offsetWidth || 116;
+    const dogHeight = francoisRoamer.offsetHeight || 88;
+    const generousMargin = window.innerWidth >= 360 ? Math.min(72, window.innerWidth * 0.12) : 10;
+    const minimumX = Math.min(generousMargin, Math.max(8, window.innerWidth - dogWidth - 8));
+    const maximumX = Math.max(minimumX, window.innerWidth - dogWidth - generousMargin);
+    const minimumY = Math.min(104, Math.max(8, window.innerHeight - dogHeight - 8));
+    const maximumY = Math.max(minimumY, window.innerHeight - dogHeight - 12);
+    return { minimumX, maximumX, minimumY, maximumY };
+  };
+
+  const setState = (state) => {
+    francoisRoamer.classList.remove(...stateClasses, 'is-looking');
+    francoisRoamer.classList.add(`is-${state}`);
+    francoisRoamer.dataset.state = state;
+  };
+
+  const moveTo = (position, duration = 0, timing = 'linear') => {
+    francoisRoamer.style.transitionDuration = `${Math.max(0, Math.round(duration))}ms`;
+    francoisRoamer.style.transitionTimingFunction = timing;
+    window.requestAnimationFrame(() => {
+      francoisRoamer.style.setProperty('--dog-x', `${position.x}px`);
+      francoisRoamer.style.setProperty('--dog-y', `${position.y}px`);
+    });
+    currentPosition = position;
+  };
 
   const showFrancoisMessage = () => {
     window.clearTimeout(messageTimer);
     messageIndex = (messageIndex + 1) % messages.length;
     francoisMessage.textContent = messages[messageIndex];
-    francoisButton.classList.add('is-speaking');
-    messageTimer = window.setTimeout(() => francoisButton.classList.remove('is-speaking'), 2600);
+    francoisRoamer.classList.add('is-speaking');
+    messageTimer = window.setTimeout(() => francoisRoamer.classList.remove('is-speaking'), 2600);
   };
 
-  francoisButton.addEventListener('pointerenter', showFrancoisMessage);
-  francoisButton.addEventListener('focus', showFrancoisMessage);
-  francoisButton.addEventListener('click', showFrancoisMessage);
+  const pointIsOverDog = (clientX, clientY) => {
+    const bounds = francoisRoamer.getBoundingClientRect();
+    return clientX >= bounds.left && clientX <= bounds.right && clientY >= bounds.top && clientY <= bounds.bottom;
+  };
+
+  const startWalking = () => {
+    if (prefersReducedMotion.matches) {
+      setState('idle');
+      return;
+    }
+
+    const bounds = getMovementBounds();
+    let destination = {
+      x: randomBetween(bounds.minimumX, bounds.maximumX),
+      y: randomBetween(bounds.minimumY, bounds.maximumY),
+    };
+    let distance = Math.hypot(destination.x - currentPosition.x, destination.y - currentPosition.y);
+
+    for (let attempt = 0; attempt < 4 && distance < 120; attempt += 1) {
+      destination = {
+        x: randomBetween(bounds.minimumX, bounds.maximumX),
+        y: randomBetween(bounds.minimumY, bounds.maximumY),
+      };
+      distance = Math.hypot(destination.x - currentPosition.x, destination.y - currentPosition.y);
+    }
+
+    const facing = destination.x >= currentPosition.x ? 1 : -1;
+    francoisRoamer.style.setProperty('--dog-facing', String(facing));
+    const walkingDuration = clamp(distance * randomBetween(11, 15), 3600, 8200);
+    const fastDuration = walkingDuration * 0.78;
+    const slowDuration = walkingDuration - fastDuration;
+    const slowingPoint = {
+      x: currentPosition.x + (destination.x - currentPosition.x) * 0.84,
+      y: currentPosition.y + (destination.y - currentPosition.y) * 0.84,
+    };
+
+    setState('walking');
+    moveTo(slowingPoint, fastDuration, 'linear');
+
+    schedule(() => {
+      setState('slowing');
+      moveTo(destination, slowDuration, 'cubic-bezier(0.16, 0.84, 0.3, 1)');
+
+      schedule(() => {
+        setState('standing');
+        schedule(() => {
+          setState('sitting');
+          schedule(() => {
+            setState('idle');
+            if (Math.random() > 0.45) showFrancoisMessage();
+
+            const pauseDuration = randomBetween(2800, 7200);
+            schedule(() => {
+              francoisRoamer.classList.add('is-looking');
+              schedule(() => francoisRoamer.classList.remove('is-looking'), 1200);
+            }, Math.min(randomBetween(700, 2200), pauseDuration - 1300));
+
+            schedule(() => {
+              setState('standing');
+              schedule(startWalking, randomBetween(420, 760));
+            }, pauseDuration);
+          }, 430);
+        }, 280);
+      }, slowDuration);
+    }, fastDuration);
+  };
+
+  const placeFrancoisSafely = (resumeWalking = true) => {
+    clearScheduledTimers();
+    const bounds = getMovementBounds();
+    currentPosition = {
+      x: clamp(currentPosition.x, bounds.minimumX, bounds.maximumX),
+      y: clamp(currentPosition.y, bounds.minimumY, bounds.maximumY),
+    };
+    setState('standing');
+    moveTo(currentPosition, 260, 'ease-out');
+    if (resumeWalking && !prefersReducedMotion.matches) schedule(startWalking, 650);
+    if (prefersReducedMotion.matches) schedule(() => setState('idle'), 300);
+  };
+
+  document.addEventListener('pointermove', (event) => {
+    const isOverDog = pointIsOverDog(event.clientX, event.clientY);
+    if (isOverDog && !pointerWasOverDog) showFrancoisMessage();
+    pointerWasOverDog = isOverDog;
+  }, { passive: true });
+
+  document.addEventListener('click', (event) => {
+    if (pointIsOverDog(event.clientX, event.clientY)) showFrancoisMessage();
+  });
+
+  window.addEventListener('resize', () => placeFrancoisSafely());
+  prefersReducedMotion.addEventListener('change', () => placeFrancoisSafely());
+
+  const initialBounds = getMovementBounds();
+  currentPosition = {
+    x: initialBounds.minimumX,
+    y: initialBounds.maximumY,
+  };
+  moveTo(currentPosition);
+  if (prefersReducedMotion.matches) {
+    setState('idle');
+  } else {
+    schedule(startWalking, 500);
+  }
 }
 
 const revealItems = document.querySelectorAll('.reveal');
