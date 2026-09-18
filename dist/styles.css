@@ -729,6 +729,15 @@ h3 {
   margin: 4px 0 0;
 }
 
+.specialty-lines {
+  display: grid;
+  gap: 2px;
+}
+
+.specialty-lines span {
+  display: block;
+}
+
 .social-list {
   display: grid;
   gap: 8px;
