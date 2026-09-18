@@ -1462,8 +1462,8 @@ body.has-page-scroll .back-to-spawn {
   .nav-links {
     order: 3;
     width: 100%;
-    justify-content: space-between;
-    gap: 14px;
+    justify-content: flex-end;
+    gap: 24px;
     padding-top: 12px;
     border-top: 1px solid var(--line);
   }
@@ -2986,18 +2986,40 @@ body.has-page-scroll .back-to-spawn {
   }
 
   .project-build-card {
-    grid-template-columns: 86px minmax(0, 1fr);
-    gap: 10px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
     padding: 12px;
   }
 
   .project-preview-wrap {
-    min-height: 96px;
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    background: #eef0f3;
+  }
+
+  .project-preview {
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .project-build-card .project-link {
+    position: static;
+    grid-column: 1;
+    justify-self: end;
+    width: 38px;
+    height: 38px;
+    background: var(--surface-2);
   }
 
   .project-copy h3 {
-    padding-right: 32px;
+    padding-right: 0;
     font-size: 1rem;
+  }
+
+  .project-meta {
+    flex-wrap: wrap;
+    row-gap: 3px;
   }
 
   .project-copy p {
