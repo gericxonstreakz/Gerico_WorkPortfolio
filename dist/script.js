@@ -364,10 +364,16 @@ if (avatarStage) {
   };
 
   if (!reduceMotion && avatarFrames.length > 1) {
-    window.setInterval(() => {
-      activeFrame = (activeFrame + 1) % avatarFrames.length;
-      showAvatarFrame(activeFrame);
-    }, 2800);
+    const scheduleNextAvatarFrame = () => {
+      const frameDuration = Number(avatarFrames[activeFrame].dataset.avatarDuration) || 2800;
+      window.setTimeout(() => {
+        activeFrame = (activeFrame + 1) % avatarFrames.length;
+        showAvatarFrame(activeFrame);
+        scheduleNextAvatarFrame();
+      }, frameDuration);
+    };
+
+    scheduleNextAvatarFrame();
   }
 }
 
