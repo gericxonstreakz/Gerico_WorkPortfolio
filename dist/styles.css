@@ -1573,11 +1573,12 @@ body.has-page-scroll .back-to-spawn {
 }
 
 /* Single-screen desktop composition, modeled on the supplied reference. */
-@media (min-width: 1180px) and (min-height: 800px) {
+@media (min-width: 1180px) {
   html,
   body {
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .shell {
@@ -1590,14 +1591,14 @@ body.has-page-scroll .back-to-spawn {
   }
 
   .portfolio-grid {
-    height: calc(100svh - 104px);
+    min-height: calc(100svh - 104px);
     padding: 0;
     gap: 12px;
     grid-template-columns:
       repeat(9, minmax(0, 1fr))
       repeat(3, minmax(0, 1.22fr));
     grid-template-rows:
-      minmax(0, 1fr)
+      minmax(310px, 1fr)
       auto
       auto
       112px;
@@ -1630,16 +1631,17 @@ body.has-page-scroll .back-to-spawn {
 
   .hero-card {
     grid-area: hero;
+    min-height: 310px;
     grid-template-columns: minmax(0, 1.6fr) minmax(250px, 0.72fr);
   }
 
   .right-rail {
     grid-area: right;
     display: grid;
-    grid-template-rows: minmax(0, 1fr) auto auto;
+    grid-template-rows: minmax(max-content, 1fr) auto auto;
     gap: 12px;
     min-width: 0;
-    min-height: 0;
+    min-height: max-content;
   }
 
   .right-rail .toolkit-card,
@@ -1735,6 +1737,7 @@ body.has-page-scroll .back-to-spawn {
 
   .toolkit-card {
     grid-area: toolkit;
+    min-height: max-content;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto repeat(4, max-content) auto;
@@ -2315,7 +2318,7 @@ body.has-page-scroll .back-to-spawn {
   transform: translateX(10px);
 }
 
-@media (min-width: 1180px) and (min-height: 800px) {
+@media (min-width: 1180px) {
   .projects-card {
     display: flex;
     flex-direction: column;
@@ -2940,7 +2943,7 @@ body.has-page-scroll .back-to-spawn {
   height: auto;
 }
 
-@media (min-width: 1180px) and (min-height: 800px) {
+@media (min-width: 1180px) {
   html.detail-page-root,
   body.detail-page {
     height: auto;
@@ -3069,4 +3072,52 @@ body.has-page-scroll .back-to-spawn {
     font-size: 0.6rem;
   }
 
+}
+
+/* Narrow laptops keep readable panels in a balanced two-column flow. */
+@media (min-width: 761px) and (max-width: 1179px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-card,
+  .toolkit-card,
+  .profile-card,
+  .projects-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .toolkit-card {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 16px 24px;
+  }
+
+  .toolkit-card .card-heading,
+  .toolkit-card .inventory-progress {
+    grid-column: 1 / -1;
+  }
+
+  .toolkit-card .skill-group {
+    margin-top: 0;
+  }
+
+  .currently-card,
+  .principles-card,
+  .time-card,
+  .stats-card,
+  .palette-card,
+  .contact-card {
+    grid-column: span 1;
+    grid-row: auto;
+  }
+}
+
+/* Short laptop viewports need room to scroll instead of compressing cards. */
+@media (min-width: 1180px) and (max-height: 880px) {
+  .portfolio-grid {
+    grid-template-rows: 310px minmax(195px, auto) minmax(195px, auto) 112px;
+  }
 }
