@@ -708,7 +708,7 @@ h3 {
   outline-offset: -6px;
 }
 
-.profile-resume-button {
+.profile-cv-button {
   z-index: 3 !important;
 }
 
@@ -2176,8 +2176,8 @@ body.has-page-scroll .back-to-spawn {
   }
 }
 
-/* Portfolio expansion: résumé, experience switcher, and build case studies. */
-.profile-resume-button {
+/* Portfolio expansion: Curriculum Vitae, experience switcher, and build case studies. */
+.profile-cv-button {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -2197,8 +2197,8 @@ body.has-page-scroll .back-to-spawn {
   box-shadow: 3px 3px 0 var(--shadow);
 }
 
-.profile-resume-button:hover,
-.profile-resume-button:focus-visible {
+.profile-cv-button:hover,
+.profile-cv-button:focus-visible {
   border-color: var(--green);
   color: var(--green);
   transform: translate(-1px, -1px);
@@ -2436,7 +2436,7 @@ body.has-page-scroll .back-to-spawn {
     z-index: 4;
   }
 
-  .profile-resume-button {
+  .profile-cv-button {
     min-height: 28px;
     padding: 0 8px;
     font-size: 0.56rem;
@@ -2911,11 +2911,11 @@ body.has-page-scroll .back-to-spawn {
   border: 1px solid var(--line-strong);
 }
 
-.resume-card {
+.cv-card {
   padding: clamp(18px, 3vw, 34px);
 }
 
-.resume-toolbar {
+.cv-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2923,12 +2923,12 @@ body.has-page-scroll .back-to-spawn {
   margin-bottom: 16px;
 }
 
-.resume-toolbar h1 {
+.cv-toolbar h1 {
   margin: 0;
   font-size: clamp(1.55rem, 3vw, 2.8rem);
 }
 
-.resume-preview {
+.cv-preview {
   display: block;
   max-width: 900px;
   margin: 0 auto;
@@ -2937,7 +2937,7 @@ body.has-page-scroll .back-to-spawn {
   box-shadow: 6px 6px 0 var(--shadow);
 }
 
-.resume-preview img {
+.cv-preview img {
   display: block;
   width: 100%;
   height: auto;
@@ -3055,7 +3055,7 @@ body.has-page-scroll .back-to-spawn {
     min-height: 220px;
   }
 
-  .resume-toolbar,
+  .cv-toolbar,
   .gallery-heading {
     align-items: flex-start;
     flex-direction: column;
