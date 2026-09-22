@@ -3122,7 +3122,7 @@ body.has-page-scroll .back-to-spawn {
   }
 }
 
-/* A gold gradient draws attention to the primary booking action. */
+/* The booking gradient follows the selected accent in both themes. */
 .hero-actions .meet-button {
   position: relative;
   z-index: 2;
@@ -3133,10 +3133,17 @@ body.has-page-scroll .back-to-spawn {
   gap: 8px;
   border: 0;
   border-radius: var(--radius);
-  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  background: linear-gradient(
+    to right,
+    var(--green),
+    color-mix(in srgb, var(--green) 35%, white),
+    var(--green),
+    color-mix(in srgb, var(--green) 42%, white),
+    var(--green)
+  );
   background-size: 200% 200%;
   background-position: left center;
-  color: #2e2504;
+  color: #081009;
   font-size: 14px;
   font-weight: 700;
   box-shadow: 5px 5px 10px rgb(0 0 0 / 18%);
