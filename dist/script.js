@@ -53,8 +53,8 @@ const workExperience = [
   {
     role: 'Financial Fraud VA / Legal Assistant',
     tense: 'Previously working at',
-    company: 'The VA Hub US',
-    period: 'JUN 2023 — JAN 2024',
+    company: 'The VA HUB US',
+    period: 'FEB 2023 — JAN 2024',
   },
 ];
 
